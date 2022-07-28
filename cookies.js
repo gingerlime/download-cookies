@@ -1,6 +1,6 @@
 // based on: https://stackoverflow.com/a/50099635/305019
 chrome.tabs.executeScript({
-  code: 'performance.getEntriesByType("resource").map(e => e.name)',
+  code: 'performance.getEntriesByType("resource").map(e => e.name).concat(performance.getEntriesByType("navigation").map(e => e.name))',
 }, data => {
   if (chrome.runtime.lastError || !data || !data[0]) return;
   const urls = data[0].map(url => url.split(/[#?]/)[0]);
